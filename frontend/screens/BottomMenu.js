@@ -85,24 +85,7 @@ const BottomTabNavigator = () => {
             ),
           }}
         />
-        {/* <Tab.Screen
-          name=" "
-          component={getComponent()} // Render the component dynamically based on iconName
-          listeners={{
-            tabPress: () => {
-              setShowDropdown(!showDropdown);
-              setClickedTab('Notifications');
-            },
-          }}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Image
-                source={require('../assets/middle_icon.png')}
-                style={[styles.tabIcon, clickedTab === 'Notifications' ? styles.clickedTab : null, clickedTab === 'Notifications' ? styles.middleIconBig : styles.middleIcon]}
-              />
-            ),
-          }}
-        /> */}
+
         <Tab.Screen
           name="ChatBot"
           component={ChatBot}

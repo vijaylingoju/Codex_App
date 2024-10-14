@@ -14,6 +14,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import UserProfile from './screens/UserProfileScreen';
 import GfgScreen from './screens/GfgScreen';
 import ChatBot from './screens/ChatBot';
+import SearchScreen from './screens/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="userprofile" component={UserProfile} options={{ headerShown: true }} />
         <Stack.Screen name="gfgprofile" component={GfgScreen} options={{ headerShown: true }} />
         <Stack.Screen name="ChatBot" component={ChatBot} options={{ headerShown: true }} />
+        <Stack.Screen name="Search" component={SearchScreen} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

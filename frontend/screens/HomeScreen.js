@@ -29,7 +29,7 @@ const HomeScreen = () => {
       }
 
       // Send token along with the username and platform to the backend
-      const response = await axios.post('http://10.0.2.2:5000/plat_details', {}, {
+      const response = await axios.post('http://192.168.1.6:5000/plat_details', {}, {
         headers: {
           Authorization: token, // Send token in the Authorization header
         },
@@ -61,7 +61,7 @@ const HomeScreen = () => {
       if (!token) {
         throw new Error('Token not found');
       }
-      const response = await axios.post('http://10.0.2.2:5000/update-username', { platform, username }, {
+      const response = await axios.post('http://192.168.1.6:5000/update-username', { platform, username }, {
         headers: {
           Authorization: token,
         },
@@ -113,7 +113,7 @@ const HomeScreen = () => {
             throw new Error('Token not found');
           }
   
-          const response = await axios.post('http://10.0.2.2:5000/update-username', { platform, username }, {
+          const response = await axios.post('http://192.168.1.6:5000/update-username', { platform, username }, {
             headers: {
               Authorization: token,
             },
@@ -386,7 +386,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
 });
 

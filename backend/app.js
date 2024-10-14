@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 app.post('/register', async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        console.log("Register API called")
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ error: 'User with this email already exists please login' });
@@ -72,7 +73,7 @@ app.post("/login", async (req, res) => {
     const oldUser = await User.findOne({ email: email });
   
     if (!oldUser) {
-      return res.status(400).send({ error: "User doesn't exist!! please singup" });
+      return res.status(400).send({ error: "User doesn't exist!! please signup" });
     }
   
     const passwordMatch = await bcrypt.compare(password, oldUser.password);
@@ -161,10 +162,7 @@ app.get("/contests", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
 
 app.post('/plat_details',verifyToken, async (req, res) => {
     // const { platform, username } = req.body;
@@ -182,4 +180,41 @@ app.post('/plat_details',verifyToken, async (req, res) => {
 
     }
     
+});
+
+// Password change endpoint
+app.post('/api/change-password', async (req, res) => {
+    const { email, currentPassword, newPassword } = req.body;
+    console.log(req.body); // Corrected console.log
+    try {
+      // Find the user by email in the database
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+      }
+  
+      // Check if the current password matches
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Current password is incorrect.' });
+      }
+  
+      // Hash the new password and update it in the database
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+  
+      // Update the user's password
+      user.password = hashedPassword; // Set the new hashed password
+      await user.save(); // Save the updated user document
+  
+      res.status(200).json({ message: 'Password changed successfully!' });
+    } catch (error) {
+      console.error('Error changing password:', error);
+      res.status(500).json({ message: 'An error occurred while changing the password.' });
+    }
+  });
+  
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

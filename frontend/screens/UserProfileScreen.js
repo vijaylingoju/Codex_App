@@ -19,7 +19,7 @@ const UserProfile = () => {
       }
 
       // Send token along with the username and platform to the backend
-      const response = await axios.post('http://10.0.2.2:5000/plat_details', {}, {
+      const response = await axios.post('http://192.168.1.6:5000/plat_details', {}, {
         headers: {
           Authorization: token, // Send token in the Authorization header
         },
